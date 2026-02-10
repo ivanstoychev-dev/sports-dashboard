@@ -29,7 +29,7 @@ export const TeamsPage = () => {
   if (isError)
     return <ErrorState message="Error occurred while loading teams" />;
 
-  if (!data?.events?.length)
+  if (!data?.sports[0]?.leagues[0]?.teams)
     return <EmptyState message={`No teams available`} />;
 
   const teams: Teams[] = data?.sports[0]?.leagues[0]?.teams;
