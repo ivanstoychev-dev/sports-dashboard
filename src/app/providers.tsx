@@ -4,10 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider as ReduxProvider } from "react-redux";
 import routerProvider from "@refinedev/react-router-v6";
-
 import { theme } from "../styles/theme";
 import type { ReactNode } from "react";
-
 import { MainLayout } from "../layout/MainLayout";
 import { store } from "../store/store";
 

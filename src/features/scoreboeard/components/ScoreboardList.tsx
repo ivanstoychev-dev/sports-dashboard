@@ -1,6 +1,5 @@
 import { useState, type FC } from "react";
 import { useSelector } from "react-redux";
-
 import { Box, Typography } from "@mui/material";
 import { useScoreboard } from "../../../hooks/useESPN";
 import GameDetailsModal from "../../../components/GameDetailsModal";
@@ -10,6 +9,8 @@ import TeamsInfo from "./TeamsInfo";
 import TopPerformers from "./TopPerformers";
 import { ButtonLink } from "../../../shared/styles/ButtonLink";
 import type { RootState } from "../../../store/store";
+import ErrorState from "../../../shared/components/ErrorState";
+import EmptyState from "../../../shared/components/EmptyState";
 
 export const Scoreboard: FC = () => {
   const [selectedGameId, setSelectedGameId] = useState<string | null>(null);
@@ -21,13 +22,14 @@ export const Scoreboard: FC = () => {
 
   if (isLoading) return <LoadingState loadingMessage="Loading scoreboard..." />;
 
-  if (isError || !data?.events?.length)
+  if (isError)
+    return <ErrorState message="Error occurred while loading games" />;
+
+  if (!data?.events?.length)
     return (
-      <Box textAlign="center" mt={4}>
-        <Typography>
-          No games available for {selectedLeague.name} today.
-        </Typography>
-      </Box>
+      <EmptyState
+        message={`No games available for ${selectedLeague.name} today`}
+      />
     );
 
   const handleShowGameDetails = (gameId: string) => {

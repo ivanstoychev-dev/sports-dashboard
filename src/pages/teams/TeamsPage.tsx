@@ -8,12 +8,14 @@ import { ButtonLink } from "../../shared/styles/ButtonLink";
 import { useState } from "react";
 import TeamDetailsDrawer from "../../features/teams/components/TeamDetailsDrawer";
 import type { Teams } from "../../features/teams/types";
+import ErrorState from "../../shared/components/ErrorState";
+import EmptyState from "../../shared/components/EmptyState";
 
 export const TeamsPage = () => {
   const selectedLeague = useSelector(
     (state: RootState) => state.league.selected,
   );
-  const { data, isLoading } = useTeams(selectedLeague);
+  const { data, isLoading, isError } = useTeams(selectedLeague);
   const [openDrawer, setOpenDrawer] = useState(false);
   const [selectedTeamId, setSelectedTeamId] = useState("");
 
@@ -22,7 +24,13 @@ export const TeamsPage = () => {
     setOpenDrawer(true);
   };
 
-  if (isLoading) return <LoadingState loadingMessage="Loading scoreboard..." />;
+  if (isLoading) return <LoadingState loadingMessage="Loading Teams..." />;
+
+  if (isError)
+    return <ErrorState message="Error occurred while loading teams" />;
+
+  if (!data?.events?.length)
+    return <EmptyState message={`No teams available`} />;
 
   const teams: Teams[] = data?.sports[0]?.leagues[0]?.teams;
 
