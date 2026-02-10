@@ -1,9 +1,9 @@
 import type { FC } from "react";
 import { LeagueSelector } from "../../features/league/LeagueSelector";
 import { Typography, Stack } from "@mui/material";
-import { Scoreboard } from "../../features/scoreboeard/components/ScoreboardList";
+import { Scoreboard } from "../../features/scoreboeard/components/ScoreBoardList/ScoreBoardList";
 
-const DashboardPage: FC = () => {
+const ScoreBoardPage: FC = () => {
   return (
     <Stack direction={"column"} gap="20px" p={3}>
       <Typography variant="h4">Scoreboard</Typography>
@@ -13,4 +13,4 @@ const DashboardPage: FC = () => {
   );
 };
 
-export default DashboardPage;
+export default ScoreBoardPage;

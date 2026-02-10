@@ -31,6 +31,7 @@ type Record = {
 export type Team = {
   logo: string;
   displayName: string;
+  shortDisplayName: string;
   records: Record[];
 };
 
